@@ -41,7 +41,7 @@ const obj = {
     getAllUsers,
     signUpUser,
     updateUser,
-    deleteUser
+    deleteUser,
 }
 
 module.exports = obj;
