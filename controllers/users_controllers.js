@@ -40,25 +40,26 @@ const signUpUser = async(req,res)=>{
 
 const loginUser = async(req,res)=>{
     const email = req.body.email;
-    const password = req.body.password;
+    const password = req.body.pass1;
+    console.log(email,password);
     try {
-        const users = await user_schema.getAll();
+        const users = await user_model.getAllUsers();
         const user = users.find(u => { return u.email === email });
         if (user) {
             const match = await bcrypt.compare(password, user.password);
             if (match) {
-                const payload = {
-                    email: user.email,
-                    check: true
-                };
-                const token = jwt.sign(payload, config.key, {
-                    expiresIn: "20s"
-                });
+                // const payload = {
+                //     email: user.email,
+                //     check: true
+                // };
+                // const token = jwt.sign(payload, config.key, {
+                //     expiresIn: "20s"
+                // });
                 res
-                .cookie("access-token", token, {
-                    httpOnly: true,
-                    sameSite: "strict",
-                })
+                // .cookie("access-token", token, {
+                //     httpOnly: true,
+                //     sameSite: "strict",
+                // })
                 .status(200).json({message:"Correct credentials"});
             } else{
                 res.json("pass doesnt match")
