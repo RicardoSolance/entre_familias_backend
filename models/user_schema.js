@@ -72,8 +72,6 @@ const usersSchema = new mongoose.Schema({
         type : Boolean,
     }
 
-
-    
 });
 
 const usersModel = mongoose.model("users", usersSchema);
