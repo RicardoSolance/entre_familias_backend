@@ -13,8 +13,6 @@ const usersSchema = new mongoose.Schema({
     },
     email: {
         type: String, 
-        required: true,
-        unique: true
     },
     gender: {
         type: String,
@@ -41,9 +39,6 @@ const usersSchema = new mongoose.Schema({
     flexibility: {
         type : Boolean,
     }
-
-
-    
 });
 
 const usersModel = mongoose.model("users", usersSchema);
