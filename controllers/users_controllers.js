@@ -1,4 +1,5 @@
 const user_model = require("../models/user_model");
+const Users=require("../models/user_schema")
 
 const getAllUsers = async(req,res) =>{
     try {
@@ -11,12 +12,15 @@ const getAllUsers = async(req,res) =>{
 
 const signUpUser = async(req,res)=>{
     try {
+        console.log(req.body);
         await user_model.signUpUser(req.body);
         res.status(200).json("User created succedfully");
     } catch (error) {
         console.log(error);
     }
 }
+
+
 
 const updateUser = async(req,res) =>{
     try {

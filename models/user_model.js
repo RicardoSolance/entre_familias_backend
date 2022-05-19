@@ -12,6 +12,7 @@ const getAllUsers = async()=>{
 const signUpUser = async (user)=>{
     try {
         const newUser = new user_schema(user);
+        
         await user_schema.create(newUser);
     } catch (error) {
         console.log(error);
