@@ -13,8 +13,6 @@ const usersSchema = new mongoose.Schema({
     },
     email: {
         type: String, 
-        required: true,
-        unique: true
     },
     gender: {
         type: String,
@@ -71,7 +69,6 @@ const usersSchema = new mongoose.Schema({
     already_a_foster_family: {
         type : Boolean,
     }
-
 });
 
 const usersModel = mongoose.model("users", usersSchema);
