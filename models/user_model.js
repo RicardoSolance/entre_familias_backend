@@ -2,14 +2,17 @@ const user_schema = require("./user_schema");
 
 const getAllUsers = async()=>{
     try {
-        const getAll = await user_schema.find({},"-_id");
+        const getAll = await user_schema.find({}, "-_id");
+        console.log('entra en ', getAll);
         return getAll;        
     } catch (error) {
         console.log(error);
     }
 }
 
-const signUpUser = async (user)=>{
+const signUpUser = async (name, surnames, gender, birthday, telephone, hashPassword, email)=>{
+    const password = hashPassword;
+    const user = {name, surnames, gender, birthday, telephone, password, email}
     try {
         const newUser = new user_schema(user);
         await user_schema.create(newUser);
