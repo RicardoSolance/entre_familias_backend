@@ -10,8 +10,18 @@ const getAllEntries = async()=>{
     }
 }
 
+const createEntry = async (entry) => {
+    try {
+        let data = await entry_schema.create(entry);
+        res.status(200)
+    } catch (error) {
+        
+    }
+}
+
 const obj = {
-    getAllEntries
+    getAllEntries,
+    createEntry
 }
 
 module.exports = obj;

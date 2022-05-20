@@ -6,6 +6,9 @@ const entrySchema = new mongoose.Schema({
         // type: mongoose.Schema.Types.ObjectId, ref: users,
         type : String,
     },
+    image: {
+        type: String,
+    },
     title: {
         type: String,
     },
