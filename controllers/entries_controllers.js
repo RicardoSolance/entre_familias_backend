@@ -9,13 +9,23 @@ const getAllEntries = async (req, res) => {
         console.log(error);
     }
 }
+const createEntry = async (req, res) => {
+    try {
+        const entry = req.body;
+        await entry_model.createEntry(entry);
+        res.status(201).json({"messsage": "Blog send to model"})
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 
 
 const obj = {
   
-    getAllEntries
+    getAllEntries,
+    createEntry
 }
 
 module.exports = obj;
