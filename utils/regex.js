@@ -5,8 +5,10 @@ const validateEmail = (email) => {
 };
 //minimo 8 caracteres, minusculas, mayusculas, caracter especial y numero
 const validatePassword = (password) => {
-    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\_\-])(?=.{8,})/;
+    // const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\_\-])(?=.{8,})/;
+    const regexPassword = /^[a-zA-Z\s]*$/;
     return regexPassword.test(password);
+    
 };
 //solo letras y espacios (se usa en nombre y en apellido)
 const validateName = (name) => {
