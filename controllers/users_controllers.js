@@ -1,7 +1,7 @@
 const user_model = require("../models/user_model");
 const bcrypt = require("bcrypt");
 const regex = require("../utils/regex");
-
+const jwt=require("jsonwebtoken")
 const getAllUsers = async(req,res) =>{
     try {
         const response = await user_model.getAllUsers();
@@ -45,22 +45,25 @@ const loginUser = async(req,res)=>{
     try {
         const users = await user_model.getAllUsers();
         const user = users.find(u => { return u.email === email });
+        
         if (user) {
+            console.log(user);
             const match = await bcrypt.compare(password, user.password);
             if (match) {
-                // const payload = {
-                //     email: user.email,
-                //     check: true
-                // };
-                // const token = jwt.sign(payload, config.key, {
-                //     expiresIn: "20s"
-                // });
-                res
+                const payload = {
+                    email: user.email,
+                    check: true,
+                    _id:user._id
+                };
+                const token = jwt.sign(payload, "secret", {
+                    expiresIn: "1h"
+                });
+                
                 // .cookie("access-token", token, {
                 //     httpOnly: true,
                 //     sameSite: "strict",
                 // })
-                .status(200).json({message:"Correct credentials"});
+                res.status(200).json({message:"Correct credentials",token});
             } else{
                 res.json("pass doesnt match")
             }
@@ -71,6 +74,8 @@ const loginUser = async(req,res)=>{
         console.log(error);
     }
 }
+
+
 
 const updateUser = async(req,res) =>{
     try {

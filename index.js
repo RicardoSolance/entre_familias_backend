@@ -9,7 +9,6 @@ app.use(express.json());
 app.use(cors());
 app.use("/api",user_routes);
 
-
 app.get('/', (req, res) => {
     res.send('Estamos Dentro');
 });

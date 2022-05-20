@@ -15,6 +15,7 @@ const signUpUser = async (name, surnames, gender, birthday, telephone, hashPassw
     const user = {name, surnames, gender, birthday, telephone, password, email}
     try {
         const newUser = new user_schema(user);
+        
         await user_schema.create(newUser);
     } catch (error) {
         console.log(error);
