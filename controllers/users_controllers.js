@@ -1,7 +1,8 @@
 const user_model = require("../models/user_model");
 const bcrypt = require("bcrypt");
 const regex = require("../utils/regex");
-const jwt=require("jsonwebtoken")
+const jwt = require("jsonwebtoken")
+
 const getAllUsers = async(req,res) =>{
     try {
         const response = await user_model.getAllUsers();
