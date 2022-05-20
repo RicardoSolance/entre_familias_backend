@@ -38,6 +38,36 @@ const usersSchema = new mongoose.Schema({
     },
     flexibility: {
         type : Boolean,
+    },
+    family_comprehension: {
+        type : Boolean,
+    },
+    biofamily_relationship: {
+        type : Boolean,
+    },
+    already_a_foster_family: {
+        type : Boolean,
+
+    },
+    civil_status: {
+        type: String,
+    },
+    number_of_children: {
+        type: Number,
+    },
+    age_of_children: [
+        {
+            type: Date,
+        }
+    ],
+    time_living_together: {
+        type : Number,
+    },
+    already_a_foster_family: {
+        type : Number,
+    },
+    already_a_foster_family: {
+        type : Boolean,
     }
 });
 
