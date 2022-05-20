@@ -2,7 +2,7 @@ const entry_schema = require('./entry_schema');
 
 const getAllEntries = async()=>{
     try {
-        const entries = await entry_schema.find({}, "-_id");
+        const entries = await entry_schema.find({}, "-_id").sort({x:1});
         console.log('estos son todas las entries', entries);
         return entries;        
     } catch (error) {
