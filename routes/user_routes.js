@@ -18,8 +18,8 @@ routes.get("/users/foro", tokenmiddleware, user_forum.getForums);
 
 //Rutas para dashbboard & blog
 // routes.get("/dashboard", user_forum.createForum);
-routes.get("/users/blog", entries_controller.getAllEntries);
-routes.post('dashboard/blog/create', entries_controller.crea)
+routes.get("/blog", entries_controller.getAllEntries);
+routes.post('/dashboard/blog/create', entries_controller.createEntry)
 
 
 module.exports = routes;

@@ -2,6 +2,10 @@ const mongoose = require('../utils/dbMongo');
 
 
 const entrySchema = new mongoose.Schema({
+    id: {
+        type: Number,
+        default:0
+    },
     author: {
         // type: mongoose.Schema.Types.ObjectId, ref: users,
         type : String,
