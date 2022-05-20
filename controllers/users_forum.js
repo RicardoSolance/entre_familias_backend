@@ -1,11 +1,13 @@
 
 const user_forum = require("../models/user_forum");
+const jwt=require("jsonwebtoken")
 
 const createForum = async (req, res) => {
     try {
-      console.log(req.body);
+      // console.log(populate("postedBy"))
       const foro = await new user_forum(req.body);
-      foro.set("postedBy","6286f9e75e000679e428c7d6")
+      
+      foro.set("postedBy",(req.payload._id))
        await foro.save() 
       
       res.status(200).send({ message: "user created successfully" });
