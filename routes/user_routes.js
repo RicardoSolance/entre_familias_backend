@@ -12,7 +12,7 @@ routes.delete("/users/delete/:email",user_controller.deleteUser);
 
 //Rutas para foro
 // routes.get("/users/foro", user_forum);
-routes.post("/users/foro/create", user_forum.createForum);
+routes.post("/users/foro/create",tokenmiddleware, user_forum.createForum);
 routes.put("/users/foro/:comment", user_forum.updateForum);
 routes.get("/users/foro", tokenmiddleware, user_forum.getForums);
 

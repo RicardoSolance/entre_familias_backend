@@ -46,6 +46,7 @@ const loginUser = async(req,res)=>{
     try {
         const users = await user_model.getAllUsers();
         const user = users.find(u => { return u.email === email });
+       
         
         if (user) {
             console.log(user);
@@ -54,7 +55,7 @@ const loginUser = async(req,res)=>{
                 const payload = {
                     email: user.email,
                     check: true,
-                    _id:user._id
+                   _id:user._id
                 };
                 const token = jwt.sign(payload, "secret", {
                     expiresIn: "1h"
