@@ -59,12 +59,12 @@ const loginUser = async(req,res)=>{
                 const token = jwt.sign(payload, "secret", {
                     expiresIn: "1h"
                 });
-                
-                // .cookie("access-token", token, {
-                //     httpOnly: true,
-                //     sameSite: "strict",
-                // })
-                res.status(200).json({message:"Correct credentials",token});
+                res
+                .cookie("access-token", token, {
+                    httpOnly: true,
+                    sameSite: "strict",
+                })
+                .status(200).json({message:"Correct credentials",token});
             } else{
                 res.json("pass doesnt match")
             }
