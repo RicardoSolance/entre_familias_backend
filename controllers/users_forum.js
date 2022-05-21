@@ -4,13 +4,15 @@ const jwt=require("jsonwebtoken")
 
 const createForum = async (req, res) => {
     try {
-console.log("llega front pregunta");
+      console.log("llega front pregunta");
       const foro = await new user_forum(req.body);
-      
+      // console.log(token);
+      console.log(req.headers);
+      const token=req.headers.authorization.split(" ")[1]
       foro.set("postedBy",(req.payload._id))
        await foro.save() 
       
-      res.status(200).send({ message: "user created successfully" });
+      res.status(200).send(token);
     } catch (err) {
       res.status(400).json({ error: err });
     }
