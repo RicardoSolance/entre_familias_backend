@@ -10,9 +10,9 @@ const getAllUsers = async()=>{
     }
 }
 
-const signUpUser = async (name, surnames, gender, birthday, telephone, hashPassword, email)=>{
+const signUpUser = async (birthday, hashPassword, email)=>{
     const password = hashPassword;
-    const user = {name, surnames, gender, birthday, telephone, password, email}
+    const user = {birthday, password, email}
     try {
         const newUser = new user_schema(user);
         
