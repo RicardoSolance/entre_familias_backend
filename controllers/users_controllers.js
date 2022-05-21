@@ -13,14 +13,15 @@ const getAllUsers = async(req,res) =>{
 }
 
 const signUpUser = async(req,res)=>{ 
-    const {birthday, email, gender, name, pass1, pass2, surnames, telephone} = req.body;
+    const {birthday, email,  pass1, pass2} = req.body;
+    console.log(req.body);
     if (req.body) {
         if (regex.validateEmail(email)) {
             if (regex.validatePassword(pass1)) {
                     if (pass1===pass2) {
                         const hashPassword = await bcrypt.hash(pass1, 10);
                             try {
-                                await user_model.signUpUser(name, surnames, gender, birthday, telephone, hashPassword, email);
+                                await user_model.signUpUser(birthday, hashPassword, email);
                                 res.status(200).json("User created succesfully");
                             } catch (error) {
                                 res.status(400).json({ message: error });
