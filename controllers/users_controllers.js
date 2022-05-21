@@ -1,7 +1,8 @@
 const user_model = require("../models/user_model");
 const bcrypt = require("bcrypt");
 const regex = require("../utils/regex");
-const jwt=require("jsonwebtoken")
+const jwt = require("jsonwebtoken")
+
 const getAllUsers = async(req,res) =>{
     try {
         const response = await user_model.getAllUsers();
@@ -59,12 +60,12 @@ const loginUser = async(req,res)=>{
                 const token = jwt.sign(payload, "secret", {
                     expiresIn: "1h"
                 });
-                
-                // .cookie("access-token", token, {
-                //     httpOnly: true,
-                //     sameSite: "strict",
-                // })
-                res.status(200).json({message:"Correct credentials",token});
+                res
+                .cookie("access-token", token, {
+                    httpOnly: true,
+                    sameSite: "strict",
+                })
+                .status(200).json({message:"Correct credentials",token});
             } else{
                 res.json("pass doesnt match")
             }
