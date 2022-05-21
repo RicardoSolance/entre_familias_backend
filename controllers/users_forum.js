@@ -4,7 +4,7 @@ const jwt=require("jsonwebtoken")
 
 const createForum = async (req, res) => {
     try {
-      // console.log(populate("postedBy"))
+console.log("llega front pregunta");
       const foro = await new user_forum(req.body);
       
       foro.set("postedBy",(req.payload._id))
@@ -16,7 +16,7 @@ const createForum = async (req, res) => {
     }
   };
   const getForums = async (req, res) => {
-    console.log(req.payload);
+  
     try {
       const forum = await user_forum.find({}).populate("postedBy")
       
@@ -31,9 +31,15 @@ const createForum = async (req, res) => {
   
     try {
       
-      const foro = await user_forum.findById(req.params.id );
-      console.log(foro);
-      Object.assign(foro, req.body);
+      // const datacomment = req.params.comment;
+      console.log("marcelo",req.params.comment);
+      console.log("diego",req.params.id);
+      console.log(req.body);
+      const foro = await user_forum.findById(req.params.comment );
+      
+      Object.assign(foro,  { $push: { comments: req.body }
+        })
+     
       foro.save();
       res.status(200).send({ message: "user updated successfully" });
     } catch (err) {
