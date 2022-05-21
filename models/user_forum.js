@@ -8,7 +8,7 @@ const usersForum = new mongoose.Schema({
     description: {
         type: String,
     },
-    postedBy: {type: mongoose.Schema.Types.ObjectId, ref: User},
+    postedBy: {type: mongoose.Schema.Types.ObjectId, ref: User, required:true},
     comments: [{
         answer:String,
         

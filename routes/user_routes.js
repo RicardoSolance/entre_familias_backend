@@ -11,15 +11,18 @@ routes.put("/users/edit/:name", user_controller.updateUser);
 routes.delete("/users/delete/:email",user_controller.deleteUser);
 
 //Rutas para foro
-// routes.get("/users/foro", user_forum);
+
 routes.post("/users/foro/create",tokenmiddleware, user_forum.createForum);
 routes.put("/users/foro/:comment", user_forum.updateForum);
-routes.get("/users/foro", tokenmiddleware, user_forum.getForums);
+
+routes.get("/users/foro", user_forum.getForums);
+
 
 //Rutas para dashbboard & blog
 // routes.get("/dashboard", user_forum.createForum);
 routes.get("/blog", entries_controller.getAllEntries);
 routes.post('/dashboard/blog/create', entries_controller.createEntry)
+
 
 
 module.exports = routes;
