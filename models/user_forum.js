@@ -8,10 +8,12 @@ const usersForum = new mongoose.Schema({
     description: {
         type: String,
     },
+    time : { type : Date, default: Date.now },
     postedBy: {type: mongoose.Schema.Types.ObjectId, ref: User, required:true},
     comments: [{
         answer:String,
-        
+        time : { type : Date, default: Date.now },
+        commentBy: {type: mongoose.Schema.Types.ObjectId, ref: User, required:true},
     }
     
 ]});
