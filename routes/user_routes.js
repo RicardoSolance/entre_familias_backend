@@ -8,14 +8,16 @@ routes.get("/users", user_controller.getAllUsers);
 routes.post("/users/create", user_controller.signUpUser);
 routes.post("/users/login", user_controller.loginUser);
 routes.put("/users/edit/:name", user_controller.updateUser);
-routes.delete("/users/delete/:email",user_controller.deleteUser);
+routes.delete("/users/delete/:email", user_controller.deleteUser);
+routes.get("/users/profile/:email", user_controller.getUser);
+
 
 //Rutas para foro
 
 routes.post("/users/foro/create",tokenmiddleware, user_forum.createForum);
 routes.put("/users/foro/:comment", user_forum.updateForum);
-
 routes.get("/users/foro", user_forum.getForums);
+
 
 
 //Rutas para dashbboard & blog
