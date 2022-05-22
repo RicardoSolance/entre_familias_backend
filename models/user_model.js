@@ -20,7 +20,7 @@ const signUpUser = async (birthday, hashPassword, email)=>{
     } catch (error) {
         console.log(error);
     }
-}
+}   
 
 const updateUser = async(user) =>{
     try {
