@@ -12,6 +12,16 @@ const getAllUsers = async(req,res) =>{
     }
 }
 
+const getUser = async (req, res) => {
+    console.log('esto es el req params', req.params.email);
+    try {
+        const response = await user_model.getUser(req.params.email);
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const signUpUser = async(req,res)=>{ 
     const {birthday, email,  pass1, pass2} = req.body;
     console.log(req.body);
@@ -107,7 +117,8 @@ const obj = {
     signUpUser,
     updateUser,
     deleteUser,
-    loginUser
+    loginUser,
+    getUser
 }
 
 module.exports = obj;

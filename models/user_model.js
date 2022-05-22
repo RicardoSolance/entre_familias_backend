@@ -40,12 +40,23 @@ const deleteUser = async(email) =>{
         console.log(error);
     }
 }
+const getUser = async (email) => {
+    try {
+        const user = await user_schema.findOne({ email: email });
+        console.log('este es el user que me trae', user);
+        return user;        
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 const obj = {
     getAllUsers,
     signUpUser,
     updateUser,
     deleteUser,
+    getUser
 }
 
 module.exports = obj;
