@@ -76,7 +76,7 @@ const loginUser = async(req,res)=>{
                     httpOnly: true,
                     sameSite: "strict",
                 })
-                .status(200).json({message:"Correct credentials",token});
+                .status(200).json({message:"Correct credentials",token, user});
             } else{
                 res.json("pass doesnt match")
             }
