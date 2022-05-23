@@ -10,27 +10,22 @@ const createForum = async (req, res) => {
       console.log(req.headers);
       // const token=req.headers.authorization.split(" ")[1]
       foro.set("postedBy",(req.payload._id))
+      foro.set("comments.commentBy")
+      // foro.set("comments.commentBy",(req.payload._id))
+      // foro.set("postedBy",(req.payload._id))
        await foro.save() 
-      
-      // res.status(200).send(token);
+       res.status(200).send({ message: "forum updated successfully" });
+
     } catch (err) {
       res.status(400).json({ error: err });
     }
   };
+  
   const getForums = async (req, res) => {
   
     try {
-      const forum = await user_forum.find({}).populate({path:"postedBy"})
-     .populate({path:"comments",populate:{path:"commentBy"}})
-      // .populate({ 
-      //   path: 'comments',
-      //   populate: {
-      //     path: 'commentBy',
-      //     // model: 'User'
-      //   } })
-      
-      
-      res.status(200).send(forum);
+      const forum = await user_forum.find({}).populate("postedBy")
+       res.status(200).send(forum);
     } catch (err) {
       res.status(500).send({ message: err.message });
     }
@@ -40,16 +35,16 @@ const createForum = async (req, res) => {
     try {
     
       const { id } = req.params;
-       
-      // const datacomment = req.params.comment;
       console.log("marcelo", req.params.comment);
       console.log("diego", req.params);
       console.log("santiago", req.body.comments);
       // const foro = await user_forum.findById(req.params.comment);
   
       user_forum.findByIdAndUpdate(
+        
+
         id,
-        // set("postedBy",(req.payload._id)),
+        
         { $push: { comments: { answer: req.body.answer } } },
         
         { safe: true, upsert: true },
@@ -60,7 +55,7 @@ const createForum = async (req, res) => {
           res.status(200).send({ message: "forum updated successfully" });
           console.log(err);
         }
-      );
+      )
   
       // Object.assign(
       //   foro,
