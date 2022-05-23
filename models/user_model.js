@@ -10,9 +10,9 @@ const getAllUsers = async()=>{
     }
 }
 
-const signUpUser = async (name, surnames, gender, birthday, telephone, hashPassword, email)=>{
+const signUpUser = async (birthday, hashPassword, email)=>{
     const password = hashPassword;
-    const user = {name, surnames, gender, birthday, telephone, password, email}
+    const user = {birthday, password, email}
     try {
         const newUser = new user_schema(user);
         
@@ -40,12 +40,23 @@ const deleteUser = async(email) =>{
         console.log(error);
     }
 }
+const getUser = async (email) => {
+    try {
+        const user = await user_schema.findOne({ email: email });
+        console.log('este es el user que me trae', user);
+        return user;        
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 const obj = {
     getAllUsers,
     signUpUser,
     updateUser,
     deleteUser,
+    getUser
 }
 
 module.exports = obj;
