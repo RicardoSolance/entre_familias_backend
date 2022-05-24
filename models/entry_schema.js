@@ -1,4 +1,5 @@
 const mongoose = require('../utils/dbMongo');
+const user = require('./user_schema');
 
 
 const entrySchema = new mongoose.Schema({
@@ -7,7 +8,7 @@ const entrySchema = new mongoose.Schema({
         default:0
     },
     author: {
-        // type: mongoose.Schema.Types.ObjectId, ref: users,
+        type: mongoose.Schema.Types.ObjectId, ref: user, requiere:true,
         type : String,
     },
     image: {
