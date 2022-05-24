@@ -22,11 +22,22 @@ const signUpUser = async (birthday, hashPassword, email)=>{
     }
 }
 
-const updateUser = async(user) =>{
+const updateUser = async (user) => {
+    
+    
+    const name = user.nameParams;
+    const filter = { name:user.nameParams };
+    const update = user;
+    console.log('user model', update);
+
+  
     try {
-        const newUser = user_schema(user.body);
-        const oldUser = await user_schema.findOne({ name: user.name});
-        oldUser.overwrite(newUser);
+        const newUser = user_schema(user);
+        const oldUser = await user_schema.findOneAndUpdate(filter,update);
+        // Object.assign(oldUser, user);
+        // oldUser.save();
+        // console.log('oldUser', user.name);
+        // oldUser.overwrite(newUser);
         await oldUser.save();
     } catch (error) {
         console.log(error);

@@ -20,55 +20,45 @@ const usersSchema = new mongoose.Schema({
     birthday: {
         type: String,
     },
-    profesion: {
+    zipcode: {
         type: String,
     },
-    salary_range: {
-        type: Number,
-    },
-    rented_mortage: {
+    famillyName: {
         type: String,
     },
-    number_of_bedrooms: {
-        type: Number,
-        integer: true
-    },
-    all_members_accept: {
-        type : Boolean,
-    },
-    flexibility: {
-        type : Boolean,
-    },
-    family_comprehension: {
-        type : Boolean,
-    },
-    biofamily_relationship: {
-        type : Boolean,
-    },
-    already_a_foster_family: {
-        type : Boolean,
-
-    },
-    civil_status: {
+    famillyType: {
         type: String,
     },
-    number_of_children: {
-        type: Number,
+    hostType: {
+        type: String,
     },
-    age_of_children: [
+    fosterTime: {
+        type : String,
+    },
+    biologicalChildren: {
+        type : String,
+    },
+    fosterChildren: {
+        type : String,
+    },
+    parentsData: [
+        
         {
-            type: Date,
-        }
-    ],
-    time_living_together: {
-        type : Number,
-    },
-    already_a_foster_family: {
-        type : Number,
-    },
-    already_a_foster_family: {
-        type : Boolean,
-    }
+            type: String,
+            
+        },
+        {
+            type: String,
+            
+        },
+        {
+            type: String,
+            
+        },
+                
+    
+    ]
+   
 });
 
 const usersModel = mongoose.model("users", usersSchema);
