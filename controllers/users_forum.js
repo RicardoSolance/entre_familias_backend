@@ -10,7 +10,7 @@ const createForum = async (req, res) => {
       console.log(req.headers);
       // const token=req.headers.authorization.split(" ")[1]
       foro.set("postedBy",(req.payload._id))
-      foro.set("comments.commentBy")
+     
       // foro.set("comments.commentBy",(req.payload._id))
       // foro.set("postedBy",(req.payload._id))
        await foro.save() 
@@ -22,9 +22,12 @@ const createForum = async (req, res) => {
   };
   
   const getForums = async (req, res) => {
-  
+    console.log("hola");
+    res.cookie("santi", "access-token")
+  console.log(req.cookies["access-token"]);
+
     try {
-      const forum = await user_forum.find({}).populate("postedBy")
+      const forum = await user_forum.find({}).populate("postedBy").populate("comments.commentBy")
        res.status(200).send(forum);
     } catch (err) {
       res.status(500).send({ message: err.message });
@@ -45,7 +48,7 @@ const createForum = async (req, res) => {
 
         id,
         
-        { $push: { comments: { answer: req.body.answer } } },
+        { $push: { comments: { answer: req.body.answer,commentBy:req.payload._id } } },
         
         { safe: true, upsert: true },
         (err, forumUpdated) => {

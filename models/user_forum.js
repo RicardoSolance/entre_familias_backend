@@ -14,7 +14,8 @@ const usersForum = new mongoose.Schema({
     comments: [{
         answer:String,
         time : { type : Date, default: Date.now },
-         commentBy: {type: mongoose.Schema.Types.ObjectId, ref: User},
+        commentBy: {type: mongoose.Schema.Types.ObjectId, ref: User, required:true},
+       
     },
     
     

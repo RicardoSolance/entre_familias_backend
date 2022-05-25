@@ -69,12 +69,7 @@ const loginUser = async(req,res)=>{
                 const token = jwt.sign(payload, "secret", {
                     expiresIn: "1h"
                 });
-                res
-                .cookie("access-token", token, {
-                    httpOnly: true,
-                    sameSite: "strict",
-                })
-                .status(200).json({message:"Correct credentials",token, user});
+                res.status(200).json({message:"Correct credentials",token, user});
             } else{
                 res.json("pass doesnt match")
             }
