@@ -1,6 +1,7 @@
 const user_model = require("../models/user_model");
 const bcrypt = require("bcrypt");
 const regex = require("../utils/regex");
+const jwt = require("jsonwebtoken")
 
 const getAllUsers = async(req,res) =>{
     try {
@@ -11,15 +12,26 @@ const getAllUsers = async(req,res) =>{
     }
 }
 
+const getUser = async (req, res) => {
+    console.log('esto es el req params', req.params.email);
+    try {
+        const response = await user_model.getUser(req.params.email);
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const signUpUser = async(req,res)=>{ 
-    const {birthday, email, gender, name, pass1, pass2, surnames, telephone} = req.body;
+    const {birthday, email,  pass1, pass2} = req.body;
+    console.log(req.body);
     if (req.body) {
         if (regex.validateEmail(email)) {
             if (regex.validatePassword(pass1)) {
                     if (pass1===pass2) {
                         const hashPassword = await bcrypt.hash(pass1, 10);
                             try {
-                                await user_model.signUpUser(name, surnames, gender, birthday, telephone, hashPassword, email);
+                                await user_model.signUpUser(birthday, hashPassword, email);
                                 res.status(200).json("User created succesfully");
                             } catch (error) {
                                 res.status(400).json({ message: error });
@@ -38,29 +50,31 @@ const signUpUser = async(req,res)=>{
     }       
 }
 
+
 const loginUser = async(req,res)=>{
     const email = req.body.email;
     const password = req.body.pass1;
-    console.log(email,password);
     try {
         const users = await user_model.getAllUsers();
         const user = users.find(u => { return u.email === email });
+       
         if (user) {
             const match = await bcrypt.compare(password, user.password);
             if (match) {
-                // const payload = {
-                //     email: user.email,
-                //     check: true
-                // };
-                // const token = jwt.sign(payload, config.key, {
-                //     expiresIn: "20s"
-                // });
+                const payload = {
+                    email: user.email,
+                    check: true,
+                   _id:user._id
+                };
+                const token = jwt.sign(payload, "secret", {
+                    expiresIn: "1h"
+                });
                 res
-                // .cookie("access-token", token, {
-                //     httpOnly: true,
-                //     sameSite: "strict",
-                // })
-                .status(200).json({message:"Correct credentials"});
+                .cookie("access-token", token, {
+                    httpOnly: true,
+                    sameSite: "strict",
+                })
+                .status(200).json({message:"Correct credentials",token, user});
             } else{
                 res.json("pass doesnt match")
             }
@@ -72,11 +86,25 @@ const loginUser = async(req,res)=>{
     }
 }
 
-const updateUser = async(req,res) =>{
+
+
+const updateUser = async (req, res) => {
+    console.log('datos de ', req.body);
+    const { name, surname, province, zipcode, familyName, familyType, hostType, fosterTime, biologicalChildren,
+        fosterChildren, parentOneStudies, parentOneArea, parentOneBirth, parentTwostudies,
+        parentTwoArea,parentTwoBirth,criminalRecord,privacyPolicy,termsCondition} = req.body
     try {
         const userBody = {
-            name: req.params.name,
-            body: req.body
+            nameParams: req.params.name,
+            name,
+            surname,
+            province,
+            zipcode,
+            familyName,
+            familyType, hostType, fosterTime, biologicalChildren,
+        fosterChildren, parentOneStudies, parentOneArea, parentOneBirth, parentTwostudies,
+        parentTwoArea,parentTwoBirth,criminalRecord,privacyPolicy,termsCondition,
+            email:'user@gmail.com'
         }
         await user_model.updateUser(userBody);
         res.status(200).json("User updated");
@@ -99,7 +127,8 @@ const obj = {
     signUpUser,
     updateUser,
     deleteUser,
-    loginUser
+    loginUser,
+    getUser
 }
 
 module.exports = obj;
