@@ -22,9 +22,7 @@ const createForum = async (req, res) => {
   };
   
   const getForums = async (req, res) => {
-    console.log("hola");
-    res.cookie("santi", "access-token")
-  console.log(req.cookies["access-token"]);
+
 
     try {
       const forum = await user_forum.find({}).populate("postedBy").populate("comments.commentBy")
