@@ -83,11 +83,23 @@ const loginUser = async(req,res)=>{
 
 
 
-const updateUser = async(req,res) =>{
+const updateUser = async (req, res) => {
+    console.log('datos de ', req.body);
+    const { name, surname, province, zipcode, familyName, familyType, hostType, fosterTime, biologicalChildren,
+        fosterChildren, parentOneStudies, parentOneArea, parentOneBirth, parentTwostudies,
+        parentTwoArea,parentTwoBirth,criminalRecord,privacyPolicy,termsCondition} = req.body
     try {
         const userBody = {
-            name: req.params.name,
-            body: req.body
+            nameParams: req.params.name,
+            name,
+            surname,
+            province,
+            zipcode,
+            familyName,
+            familyType, hostType, fosterTime, biologicalChildren,
+        fosterChildren, parentOneStudies, parentOneArea, parentOneBirth, parentTwostudies,
+        parentTwoArea,parentTwoBirth,criminalRecord,privacyPolicy,termsCondition,
+            email:'user@gmail.com'
         }
         await user_model.updateUser(userBody);
         res.status(200).json("User updated");
