@@ -15,7 +15,7 @@ routes.get("/users/profile/:email", user_controller.getUser);
 //Rutas para foro
 
 routes.post("/users/foro/create",tokenmiddleware, user_forum.createForum);
-routes.put("/users/foro/:comment", user_forum.updateForum);
+routes.put("/users/foro/:id",tokenmiddleware, user_forum.updateForum);
 routes.get("/users/foro", user_forum.getForums);
 
 
